@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui">
+  <ribbon>
+    <tabs>
+      <tab id="AITeX_Tab" label="AI 公式" insertAfterMso="TabInsert">
+        <group id="AITeX_GroupConvert" label="TeX 转 Word 公式">
+          <button id="AITeX_ConvertSelection"
+                  label="转换选中内容"
+                  size="large"
+                  imageMso="EquationInsertNew"
+                  screentip="转换选中的 AI TeX"
+                  supertip="识别选区内的 \(...\) 和 \[...\]，转换为可编辑的 Word 原生公式。"
+                  onAction="AITeX_RibbonConvertSelection"/>
+          <button id="AITeX_ConvertDocument"
+                  label="转换全文"
+                  size="large"
+                  imageMso="EquationProfessional"
+                  screentip="转换正文中的 AI TeX"
+                  supertip="扫描正文全文，将 \(...\) 转为行内公式，将 \[...\] 转为独立公式。"
+                  onAction="AITeX_RibbonConvertDocument"/>
+        </group>
+      </tab>
+    </tabs>
+  </ribbon>
+</customUI>

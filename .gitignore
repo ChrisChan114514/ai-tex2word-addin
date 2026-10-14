@@ -1,0 +1,5 @@
+dist/*.dotm
+dist/build.dotm
+dist/module-*.bas
+dist/probe-*.dotm
+*.backup-*

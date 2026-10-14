@@ -1,0 +1,95 @@
+AI TeX Word Add-in Educational and Research License 1.0
+
+Copyright (c) 2026 Chen Wenxuan
+All rights reserved.
+
+1. Definitions
+
+"Software" means the AI TeX Word Add-in software, source code, compiled
+artifacts, documentation, and associated files distributed with this license.
+
+"Non-Commercial Educational and Research Use" means use solely for personal
+learning, classroom teaching, academic study, academic publication, or
+non-commercial scientific research, where the use is not primarily intended
+for commercial advantage, monetary compensation, or revenue generation.
+
+"Commercial Use" means any use of the Software that is intended for or
+directed toward commercial advantage, monetary compensation, or revenue
+generation. Commercial Use includes, without limitation:
+
+  a. use by or on behalf of a for-profit entity in support of its business;
+  b. use in a paid product, paid service, consulting engagement, or hosted
+     service;
+  c. sale, paid licensing, sublicensing, or commercial distribution;
+  d. bundling or integrating the Software with a commercial product or
+     service; and
+  e. use in commercially sponsored research or development intended for
+     commercial exploitation.
+
+2. Non-Commercial License Grant
+
+Subject to the terms of this license, the copyright holders grant you a
+worldwide, royalty-free, non-exclusive, non-transferable license to use, copy,
+study, modify, and redistribute the Software solely for Non-Commercial
+Educational and Research Use.
+
+3. Conditions
+
+Any copy or redistribution of the Software, whether modified or unmodified,
+must:
+
+  a. retain the above copyright notice and this complete license;
+  b. clearly state any material modifications you made;
+  c. not use the names of the copyright holders or contributors to endorse or
+     promote a derived work without prior written permission; and
+  d. be distributed only for Non-Commercial Educational and Research Use
+     under this license, unless separate written permission has been granted.
+
+4. Commercial Licensing
+
+No Commercial Use is permitted under this license. Before making any
+Commercial Use of the Software, you must obtain a separate written commercial
+license or other written permission from the applicable copyright holder(s).
+Commercial licensing requests should be directed to Chen Wenxuan through:
+https://github.com/ChrisChan114514
+
+5. Ownership
+
+The Software is licensed, not sold. The copyright holders retain all right,
+title, and interest in and to the Software. Except for the rights expressly
+granted in Section 2, no rights are granted by implication, estoppel, or
+otherwise.
+
+6. Termination
+
+Your rights under this license terminate automatically if you violate any of
+its terms. Upon termination, you must stop using and distributing the Software
+and delete all copies under your control. Sections 5, 7, 8, and 9 survive
+termination.
+
+7. Disclaimer of Warranty
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT. YOU ASSUME ALL
+RISK ARISING FROM THE USE OR PERFORMANCE OF THE SOFTWARE.
+
+8. Limitation of Liability
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL THE
+COPYRIGHT HOLDERS OR CONTRIBUTORS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM,
+OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OF OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+9. Severability
+
+If any provision is held unenforceable, that provision shall be enforced to
+the maximum extent permitted and the remaining provisions shall remain in
+effect.
+
+10. No Open Source Representation
+
+Because this license restricts Commercial Use, it is a source-available
+license and is not an open source license as that term is commonly defined by
+the Open Source Initiative.
