@@ -72,12 +72,15 @@ Private Function ConvertMatches(ByVal target As Range) As Long
     Set re = CreateObject("VBScript.RegExp")
     re.Global = True
     re.MultiLine = True
-    re.Pattern = "\\\(([\s\S]*?)\\\)|\\\[([\s\S]*?)\\\]"
+    ' Accept normal TeX delimiters and their JSON/Markdown-escaped form:
+    ' \(...\), \[...\], \\(...\\), and \\[...\\].
+    re.Pattern = "\\{1,2}\(([\s\S]*?)\\{1,2}\)|\\{1,2}\[([\s\S]*?)\\{1,2}\]"
     Set allMatches = re.Execute(target.Text)
 
     For i = allMatches.Count - 1 To 0 Step -1
         Set oneMatch = allMatches.Item(i)
-        displayMode = (Left$(oneMatch.Value, 2) = "\[")
+        displayMode = (InStr(1, Left$(oneMatch.Value, 3), "[", _
+                             vbBinaryCompare) > 0)
         If displayMode Then
             tex = CStr(oneMatch.SubMatches(1))
         Else
@@ -136,9 +139,33 @@ Failed:
 End Function
 
 Private Function NormalizeTex(ByVal tex As String) As String
+    Dim scriptCommand As Object
+    Dim operatorName As Object
+
     tex = Trim$(tex)
     tex = Replace(tex, "\displaystyle", "")
     tex = Replace(tex, "\dfrac", "\frac")
     tex = Replace(tex, "\tfrac", "\frac")
+
+    ' AI and Markdown output sometimes escapes underscores inside math as \_.
+    ' Word would render that as a literal underscore instead of a subscript.
+    tex = Replace(tex, "\_", "_")
+
+    ' Word's linear equation parser needs a command used as a script to be
+    ' grouped. For example, C_\pi loses the final letter, while C_{\pi}
+    ' builds correctly. Apply the same repair to superscripts and to any
+    ' alphabetic command (Greek letters, \infty, and similar commands).
+    Set scriptCommand = CreateObject("VBScript.RegExp")
+    scriptCommand.Global = True
+    scriptCommand.Pattern = "([_^])\\([A-Za-z]+)"
+    tex = scriptCommand.Replace(tex, "$1{\$2}")
+
+    ' \operatorname is common in AI-generated TeX but is not understood by
+    ' Word's linear parser. The equivalent upright text style is supported.
+    Set operatorName = CreateObject("VBScript.RegExp")
+    operatorName.Global = True
+    operatorName.Pattern = "\\operatorname\*?\{([^{}]+)\}"
+    tex = operatorName.Replace(tex, "\mathrm{$1}")
+
     NormalizeTex = Trim$(tex)
 End Function
