@@ -1,0 +1,255 @@
+[
+  {
+    "id": "reported-underbrace",
+    "tex": "Z_{in}(\\omega)=\n\n\\underbrace{\\frac{1}{j\\omega C_{in}}}_{第一部分}+\n\\underbrace{j\\omega L_g\\frac{1-\\omega^2L_sC_{gs}}{1-\\omega^2(L_g+L_s)C_{gs}}}_{第二部分}",
+    "xpath": ".//m:groupChr",
+    "count": 2,
+    "text": "第一部分第二部分",
+    "checks": [
+      {
+        "xpath": ".//m:f",
+        "count": 2
+      },
+      {
+        "xpath": ".//m:limLow",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "id": "nested-fractions",
+    "tex": "\\frac{1+\\frac{a}{b}}{\\sqrt{1+x^2}}",
+    "xpath": ".//m:f",
+    "count": 2
+  },
+  {
+    "id": "scripts",
+    "tex": "x_i^2+y^{n+1}_{j_k}",
+    "xpath": ".//m:sSubSup",
+    "count": 2
+  },
+  {
+    "id": "greek-scripts",
+    "tex": "C_\\pi+R_\\mu+x_\\alpha",
+    "xpath": ".//m:sSub",
+    "count": 3,
+    "text": "πμα"
+  },
+  {
+    "id": "escaped-scripts",
+    "tex": "R\\_\\pi+C\\_{be}",
+    "xpath": ".//m:sSub",
+    "count": 2
+  },
+  {
+    "id": "root",
+    "tex": "\\sqrt[3]{a+\\sqrt{b}}",
+    "xpath": ".//m:rad",
+    "count": 2
+  },
+  {
+    "id": "sum",
+    "tex": "\\sum_{k=0}^{n} k^2",
+    "xpath": ".//m:nary",
+    "count": 1
+  },
+  {
+    "id": "integral",
+    "tex": "\\int_0^\\infty e^{-x}\\,dx",
+    "xpath": ".//m:nary",
+    "count": 1
+  },
+  {
+    "id": "double-integral",
+    "tex": "\\iint_D f(x,y)\\,dx\\,dy",
+    "xpath": ".//m:nary",
+    "count": 1
+  },
+  {
+    "id": "product",
+    "tex": "\\prod_{i=1}^n a_i",
+    "xpath": ".//m:nary",
+    "count": 1
+  },
+  {
+    "id": "limits",
+    "tex": "\\lim_{x\\to0}\\frac{\\sin x}{x}",
+    "xpath": ".//m:limLow",
+    "count": 1
+  },
+  {
+    "id": "binomial",
+    "tex": "\\binom{n}{k}",
+    "xpath": ".//m:f",
+    "count": 1
+  },
+  {
+    "id": "bmatrix",
+    "tex": "\\begin{bmatrix}a&b\\\\c&d\\end{bmatrix}",
+    "xpath": ".//m:m/m:mr",
+    "count": 2
+  },
+  {
+    "id": "column-vector",
+    "tex": "\\begin{pmatrix}x\\\\y\\\\z\\end{pmatrix}",
+    "xpath": ".//m:m/m:mr",
+    "count": 3
+  },
+  {
+    "id": "nested-matrices",
+    "tex": "\\begin{pmatrix}\\begin{matrix}a&b\\\\c&d\\end{matrix}&x\\\\y&z\\end{pmatrix}",
+    "xpath": ".//m:m",
+    "count": 2
+  },
+  {
+    "id": "determinant",
+    "tex": "\\begin{vmatrix}a&b\\\\c&d\\end{vmatrix}",
+    "xpath": ".//m:m",
+    "count": 1
+  },
+  {
+    "id": "cases",
+    "tex": "f(x)=\\begin{cases}x^2&x>0\\\\0&x\\le0\\end{cases}",
+    "xpath": ".//m:m/m:mr",
+    "count": 2
+  },
+  {
+    "id": "aligned",
+    "tex": "\\begin{aligned}a&=b+c\\\\d&=e-f\\end{aligned}",
+    "xpath": ".//m:eqArr/m:e",
+    "count": 2
+  },
+  {
+    "id": "gathered",
+    "tex": "\\begin{gathered}a=b\\\\c=d\\end{gathered}",
+    "xpath": ".//m:m/m:mr",
+    "count": 2
+  },
+  {
+    "id": "array",
+    "tex": "\\begin{array}{rl}a&b\\\\c&d\\end{array}",
+    "xpath": ".//m:eqArr/m:e",
+    "count": 2
+  },
+  {
+    "id": "text-cjk",
+    "tex": "\\text{输入阻抗}=R+\\mathrm{j}X",
+    "text": "输入阻抗"
+  },
+  {
+    "id": "operator",
+    "tex": "\\operatorname{Re}(z)+\\operatorname*{argmax}_{x}f(x)",
+    "text": "Re"
+  },
+  {
+    "id": "fonts",
+    "tex": "\\mathbf{A}+\\mathbb{R}+\\mathcal{L}+\\mathsf{T}"
+  },
+  {
+    "id": "accents",
+    "tex": "\\hat{x}+\\vec{v}+\\dot{x}+\\ddot{y}",
+    "xpath": ".//m:acc",
+    "count": 4
+  },
+  {
+    "id": "bars",
+    "tex": "\\overline{AB}+\\underline{x}"
+  },
+  {
+    "id": "overbrace",
+    "tex": "\\overbrace{a+b+c}^{n\\text{项}}",
+    "xpath": ".//m:groupChr",
+    "count": 1
+  },
+  {
+    "id": "underset",
+    "tex": "\\underset{x}{\\overset{y}{=}}",
+    "xpath": ".//m:limLow",
+    "count": 1
+  },
+  {
+    "id": "delimiters",
+    "tex": "\\left\\langle\\frac{x}{y}\\middle|z\\right\\rangle",
+    "xpath": ".//m:d",
+    "count": 1
+  },
+  {
+    "id": "spacing",
+    "tex": "a\\ b\\,c\\;d\\quad e\\qquad f\\!g"
+  },
+  {
+    "id": "arrows-relations",
+    "tex": "A\\subseteq B\\implies x\\in B\\iff y\\notin C"
+  },
+  {
+    "id": "macro",
+    "tex": "\\newcommand{\\vect}[1]{\\mathbf{#1}}\\vect{x}+\\vect{y}"
+  },
+  {
+    "id": "derivatives",
+    "tex": "\\frac{\\partial^2 f}{\\partial x^2}+f'(x)",
+    "xpath": ".//m:f",
+    "count": 1
+  },
+  {
+    "id": "displaystyle",
+    "tex": "\\displaystyle\\dfrac{a}{b}+\\tfrac{c}{d}",
+    "xpath": ".//m:f",
+    "count": 2
+  },
+  {
+    "id": "cancel",
+    "tex": "\\cancel{x}+\\bcancel{y}+\\xcancel{z}"
+  },
+  {
+    "id": "boxed",
+    "tex": "\\boxed{E=mc^2}"
+  },
+  {
+    "id": "literal-xml",
+    "tex": "\\text{A < B & C > D}",
+    "text": "A < B & C > D"
+  },
+  {
+    "id": "unknown-command",
+    "tex": "\\ThisCommandDoesNotExist{x}",
+    "error": true
+  },
+  {
+    "id": "unclosed-fraction",
+    "tex": "\\frac{a}{b",
+    "error": true
+  },
+  {
+    "id": "unclosed-environment",
+    "tex": "\\begin{bmatrix}a&b",
+    "error": true
+  },
+  {
+    "id": "empty",
+    "tex": " ",
+    "error": true
+  },
+  {
+    "id": "file-input",
+    "tex": "\\input{secret.tex}",
+    "error": true
+  },
+  {
+    "id": "shell-command",
+    "tex": "\\write18{echo should-not-run}",
+    "error": true
+  },
+  {
+    "id": "underbracket",
+    "tex": "\\underbracket{a+b+c}_{n}",
+    "xpath": ".//m:groupChr",
+    "count": 1
+  },
+  {
+    "id": "nested-underbrace",
+    "tex": "\\underbrace{a+\\underbrace{b+c}_{m}}_{n}",
+    "xpath": ".//m:groupChr",
+    "count": 2
+  }
+]

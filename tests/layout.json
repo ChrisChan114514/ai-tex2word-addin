@@ -1,0 +1,148 @@
+[
+  {
+    "id": "inline-prose",
+    "source": "Before \\(x_1\\) after.",
+    "layout": "Before [M] after.\r",
+    "types": [
+      1
+    ]
+  },
+  {
+    "id": "inline-multiple",
+    "source": "Before \\(x_1\\), \\(\\frac{a}{b}\\) after.",
+    "layout": "Before [M], [M] after.\r",
+    "types": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": "inline-start",
+    "source": "\\(x\\) follows.",
+    "layout": "[M] follows.\r",
+    "types": [
+      1
+    ]
+  },
+  {
+    "id": "inline-end",
+    "source": "Before \\(x\\)",
+    "layout": "Before [M]\r",
+    "types": [
+      1
+    ]
+  },
+  {
+    "id": "inline-only",
+    "source": "\\(x\\)",
+    "layout": "[M] \r",
+    "types": [
+      1
+    ]
+  },
+  {
+    "id": "inline-adjacent",
+    "source": "A\\(x\\)\\(y\\)B",
+    "layout": "A[M]B\r",
+    "types": [
+      1
+    ],
+    "convertedCount": 2,
+    "mathText": "xy"
+  },
+  {
+    "id": "inline-multiline-source",
+    "source": "Before \\(a+\rb\\) after.",
+    "layout": "Before [M] after.\r",
+    "types": [
+      1
+    ]
+  },
+  {
+    "id": "inline-matrix",
+    "source": "Before \\(\\begin{bmatrix}a&b\\\\c&d\\end{bmatrix}\\) after.",
+    "layout": "Before [M] after.\r",
+    "types": [
+      1
+    ]
+  },
+  {
+    "id": "existing-paragraphs",
+    "source": "Before \\(a\\).\r\rAfter \\(b\\).",
+    "layout": "Before [M].\r\rAfter [M].\r",
+    "types": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": "existing-soft-break",
+    "source": "Before \\(a\\)\u000bafter \\(b\\).",
+    "layout": "Before [M]\u000bafter [M].\r",
+    "types": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": "display-prose",
+    "source": "Before\\[x\\]After.",
+    "layout": "Before\u000b[M]\u000bAfter.\r",
+    "types": [
+      0
+    ]
+  },
+  {
+    "id": "mixed-prose",
+    "source": "Before \\(a\\) middle\\[b\\]after \\(c\\).",
+    "layout": "Before [M] middle\u000b[M]\u000bafter [M].\r",
+    "types": [
+      1,
+      0,
+      1
+    ]
+  },
+  {
+    "id": "display-own-paragraph",
+    "source": "Before\r\\[x\\]\rAfter.",
+    "layout": "Before\r[M]\rAfter.\r",
+    "types": [
+      0
+    ]
+  },
+  {
+    "id": "display-multiline-source",
+    "source": "Before\r\\[\rx\r\\]\rAfter.",
+    "layout": "Before\r[M]\rAfter.\r",
+    "types": [
+      0
+    ]
+  },
+  {
+    "id": "display-adjacent",
+    "source": "Before\\[x\\]\\[y\\]After.",
+    "layout": "Before\u000b[M]\u000b[M]\u000bAfter.\r",
+    "types": [
+      0,
+      0
+    ]
+  },
+  {
+    "id": "display-only",
+    "source": "\\[x\\]",
+    "layout": "[M]\r",
+    "types": [
+      0
+    ]
+  },
+  {
+    "id": "reported-chinese-prose",
+    "source": "为了提高整个工作频段内的增益均匀性，如图 3 所示，利用电容 \\(C_d\\) 和级间变压器（ITF）的初级电感 \\(L_1\\)，在晶体管 \\(M_1\\) 的漏极节点构成一个并联谐振电路。",
+    "layout": "为了提高整个工作频段内的增益均匀性，如图 3 所示，利用电容 [M] 和级间变压器（ITF）的初级电感 [M]，在晶体管 [M] 的漏极节点构成一个并联谐振电路。\r",
+    "types": [
+      1,
+      1,
+      1
+    ]
+  }
+]

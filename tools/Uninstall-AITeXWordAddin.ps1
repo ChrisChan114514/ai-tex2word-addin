@@ -16,3 +16,14 @@ if (Test-Path -LiteralPath $installedTemplate) {
 } else {
     Write-Output 'The AI TeX Word Add-in is not installed.'
 }
+
+# Remove only companion files owned by this add-in, leaving other files alone.
+$engineDirectory = Join-Path $InstallDirectory 'AITeXEngine'
+foreach ($name in @('Convert-TexToOmml.ps1', 'engine.json')) {
+    $path = Join-Path $engineDirectory $name
+    if (Test-Path -LiteralPath $path) { Remove-Item -LiteralPath $path -Force }
+}
+if ((Test-Path -LiteralPath $engineDirectory) -and
+    @(Get-ChildItem -LiteralPath $engineDirectory -Force).Count -eq 0) {
+    Remove-Item -LiteralPath $engineDirectory
+}

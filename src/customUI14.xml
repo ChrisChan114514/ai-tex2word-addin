@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui">
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui"
+          onLoad="AITeX_RibbonOnLoad">
   <ribbon>
     <tabs>
       <tab id="AITeX_Tab" label="AI 公式" insertAfterMso="TabInsert">
@@ -8,8 +9,8 @@
                   label="转换选中内容"
                   size="large"
                   imageMso="EquationInsertNew"
-                  screentip="转换选中的 AI TeX"
-                  supertip="识别选区内的 \(...\) 和 \[...\]，转换为可编辑的 Word 原生公式。"
+                  screentip="转换选中的 AI TeX（Ctrl+Alt+Shift+E）"
+                  supertip="识别选区内的 \(...\) 和 \[...\]，转换为可编辑的 Word 原生公式。快捷键仅在未被其他命令占用时启用。"
                   onAction="AITeX_RibbonConvertSelection"/>
           <button id="AITeX_ConvertDocument"
                   label="转换全文"
@@ -18,6 +19,11 @@
                   screentip="转换正文中的 AI TeX"
                   supertip="扫描正文全文，将 \(...\) 转为行内公式，将 \[...\] 转为独立公式。"
                   onAction="AITeX_RibbonConvertDocument"/>
+          <button id="AITeX_ConversionErrors"
+                  label="转换错误详情"
+                  imageMso="ReviewShowMarkupMenu"
+                  screentip="查看本次未转换公式的原因"
+                  onAction="AITeX_ShowLastReport"/>
         </group>
       </tab>
     </tabs>
