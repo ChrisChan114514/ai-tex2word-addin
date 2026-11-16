@@ -60,6 +60,136 @@ Public Sub AITeX_RibbonConvertDocument(ByVal control As Object)
     RunConversion ActiveDocument.Content.Duplicate
 End Sub
 
+Public Sub AITeX_RibbonRemoveBoxes(ByVal control As Object)
+    AITeX_RemoveDocumentBoxesMacro
+End Sub
+
+Public Sub AITeX_RemoveDocumentBoxesMacro()
+    Dim count As Long
+    count = AITeX_RemoveDocumentBoxesSilent()
+End Sub
+
+Public Function AITeX_RemoveDocumentBoxesSilent() As Long
+    Dim doc As Document, firstStory As Range, story As Range
+    Dim section As Section, header As HeaderFooter, shape As Shape
+    Dim i As Long, count As Long
+    Dim oldUpdate As Boolean, recordStarted As Boolean
+
+    If Documents.Count = 0 Or mConverting Then Exit Function
+    Set doc = ActiveDocument
+    mLastReport = ""
+    If doc.ProtectionType <> wdNoProtection Then
+        mLastReport = "Cannot remove equation boxes from a protected document."
+        Application.StatusBar = "AI TeX: " & mLastReport
+        Exit Function
+    End If
+
+    mConverting = True
+    oldUpdate = Application.ScreenUpdating
+    Application.ScreenUpdating = False
+    On Error GoTo Failed
+
+    ' Include tables, headers, footers, notes and text-frame stories.
+    For Each firstStory In doc.StoryRanges
+        Set story = firstStory.Duplicate
+        Do While Not story Is Nothing
+            For i = story.OMaths.Count To 1 Step -1
+                RemoveEquationBoxes story.OMaths.Item(i), count, recordStarted
+            Next i
+            Set story = story.NextStoryRange
+        Loop
+    Next firstStory
+    ' Header/footer text frames and some grouped shapes are not StoryRanges.
+    For Each shape In doc.Shapes
+        RemoveShapeEquationBoxes shape, count, recordStarted
+    Next shape
+    For Each section In doc.Sections
+        For Each header In section.Headers
+            If header.Exists Then
+                For Each shape In header.Shapes
+                    RemoveShapeEquationBoxes shape, count, recordStarted
+                Next shape
+            End If
+        Next header
+        For Each header In section.Footers
+            If header.Exists Then
+                For Each shape In header.Shapes
+                    RemoveShapeEquationBoxes shape, count, recordStarted
+                Next shape
+            End If
+        Next header
+    Next section
+    GoTo Done
+Failed:
+    mLastReport = "Remove equation boxes: " & Err.Description
+Done:
+    On Error Resume Next
+    If recordStarted Then Application.UndoRecord.EndCustomRecord
+    Application.ScreenUpdating = oldUpdate
+    mConverting = False
+    Application.StatusBar = "AI TeX: " & count & " equation boxes removed."
+    If Len(mLastReport) > 0 Then _
+        Application.StatusBar = "AI TeX: " & mLastReport
+    On Error GoTo 0
+    AITeX_RemoveDocumentBoxesSilent = count
+End Function
+
+Private Sub RemoveShapeEquationBoxes(ByVal shape As Shape, ByRef count As Long, _
+                                     ByRef recordStarted As Boolean)
+    Dim i As Long
+    Dim frame As TextFrame, hasText As Boolean
+    If shape.Type = msoGroup Then
+        For i = shape.GroupItems.Count To 1 Step -1
+            RemoveShapeEquationBoxes shape.GroupItems.Item(i), count, recordStarted
+        Next i
+    Else
+        ' Pictures and other shapes may not expose a usable text frame.
+        On Error Resume Next
+        Set frame = shape.TextFrame
+        hasText = (frame.HasText <> 0)
+        On Error GoTo 0
+        If hasText Then
+            For i = frame.TextRange.OMaths.Count To 1 Step -1
+                RemoveEquationBoxes frame.TextRange.OMaths.Item(i), _
+                                    count, recordStarted
+            Next i
+        End If
+    End If
+End Sub
+
+Private Sub RemoveEquationBoxes(ByVal equation As OMath, ByRef count As Long, _
+                                ByRef recordStarted As Boolean)
+    Dim i As Long, j As Long
+    Dim fn As OMathFunction, border As OMathBorderBox
+
+    ' Work from the innermost arguments outward, and backwards among siblings.
+    ' Remove unwraps the function while preserving editable native contents.
+    For i = equation.Functions.Count To 1 Step -1
+        Set fn = equation.Functions.Item(i)
+        ' Text functions expose their own range as an argument, not a child.
+        If fn.Type <> wdOMathFunctionText And _
+           fn.Type <> wdOMathFunctionNormalText Then
+            For j = fn.Args.Count To 1 Step -1
+                RemoveEquationBoxes fn.Args.Item(j), count, recordStarted
+            Next j
+        End If
+        If fn.Type = wdOMathFunctionBorderBox Then
+            Set border = fn.BorderBox
+            ' Cancellation marks also use borderBox, with all four sides hidden.
+            ' Keep those and invisible operator/grouping boxes intact.
+            If Not (border.HideTop And border.HideBot And _
+                    border.HideLeft And border.HideRight) Then
+                If Not recordStarted Then
+                    Application.UndoRecord.StartCustomRecord "AI TeX: remove boxes"
+                    recordStarted = True
+                End If
+                fn.Remove
+                count = count + 1
+            End If
+        End If
+    Next i
+End Sub
+
 Public Sub AITeX_RibbonHelp(ByVal control As Object)
 End Sub
 
@@ -113,7 +243,7 @@ Public Function AITeX_GetLastReport() As String
 End Function
 
 Public Function AITeX_GetVersion() As String
-    AITeX_GetVersion = "2026.10.31-formatting"
+    AITeX_GetVersion = "2026.11.04-remove-boxes"
 End Function
 
 Public Sub AITeX_ShowLastReport(ByVal control As Object)

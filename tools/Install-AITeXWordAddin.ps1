@@ -101,6 +101,7 @@ if ($BuildOnly) {
         & (Join-Path $PSScriptRoot 'Test-AITeXWordAddin.ps1') -ExpectedTemplate $distTemplate
         & (Join-Path $PSScriptRoot 'Test-FormulaLayout.ps1') -ExpectedTemplate $distTemplate
         & (Join-Path $PSScriptRoot 'Test-FormulaFormatting.ps1') -ExpectedTemplate $distTemplate
+        & (Join-Path $PSScriptRoot 'Test-RemoveEquationBoxes.ps1') -ExpectedTemplate $distTemplate
     }
     return
 }
@@ -125,6 +126,7 @@ if (-not $SkipTest) {
     & (Join-Path $PSScriptRoot 'Test-AITeXWordAddin.ps1') -ExpectedTemplate $installedTemplate
     & (Join-Path $PSScriptRoot 'Test-FormulaLayout.ps1') -ExpectedTemplate $installedTemplate
     & (Join-Path $PSScriptRoot 'Test-FormulaFormatting.ps1') -ExpectedTemplate $installedTemplate
+    & (Join-Path $PSScriptRoot 'Test-RemoveEquationBoxes.ps1') -ExpectedTemplate $installedTemplate
 }
 
 $openWord = @(Get-Process WINWORD -ErrorAction SilentlyContinue)

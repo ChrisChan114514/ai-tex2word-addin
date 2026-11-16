@@ -15,6 +15,7 @@
 - 使用数学解析引擎处理嵌套分式、上下括注及中文标注、根式、积分求和、矩阵、分段与多行对齐；直接插入 OMML，不再调用 Word 的线性 `BuildUp` 解析器。
 - 遇到未知命令、语法错误或解析警告时保留该公式原文，其余公式继续转换；点击“转换错误详情”查看原因。
 - 支持转换选中内容或正文全文。
+- 点击“去除公式方框”，一键移除全文 Word 原生公式的 box 外框（包括嵌套方框），保留内部公式内容与结构；支持一次撤销。
 - 使用 `Ctrl+Alt+Shift+E` 快速转换选中内容；如该组合已被占用，加载项不会覆盖原命令。
 - 使用 Word 原生公式，可继续编辑、复制和导出。
 - 一次转换记录为一个撤销操作，可立即按 `Ctrl+Z` 恢复。
@@ -61,6 +62,8 @@ VBA 模块使用纯 ASCII 文本，以避开部分中文 Windows/Office 组合�
 
 打开 **AI 公式**，选择“转换选中内容”或“转换全文”。
 
+若公式带有 `\boxed{...}` 形成的外框，点击 **AI 公式 → 公式整理 → 去除公式方框**，即可一次去掉文档中的所有公式方框，无需先选中内容。该按钮处理 Word 原生公式，覆盖正文、表格、页眉页脚、脚注、尾注、批注和文本框；保留公式的分式、上下标等结构、行内/独立公式类型与段落格式，也保留取消线和不可见的数学分组。尚未转换的 TeX 文本请先点击“转换全文”。操作后可按 `Ctrl+Z` 一次恢复，受保护的文档需先解除保护。
+
 也可以先选中一段文字，再按 `Ctrl+Alt+Shift+E`。加载项在 Word 启动时检查快捷键，仅当该组合尚未分配时才注册，因此不会覆盖 Word、用户或其他加载项已有的快捷键。
 
 ## 兼容性
@@ -88,6 +91,9 @@ VBA 模块使用纯 ASCII 文本，以避开部分中文 Windows/Office 组合�
 # 检查段后 2 磅、直接格式/样式、混合段落格式及选区转换
 .\tools\Test-FormulaFormatting.ps1
 
+# 检查去除公式方框、嵌套结构、各文档区域、格式保留和一次撤销
+.\tools\Test-RemoveEquationBoxes.ps1
+
 # 另存覆盖用例的 Word 文档与 Word 导出的 PDF，便于检查外观
 .\tools\Test-AITeXWordAddin.ps1 -ReviewDirectory "$PWD\dist\review"
 ```
@@ -114,6 +120,7 @@ tools/Test-AITeXWordAddin.ps1    自动化测试
 tools/Test-TexEngine.ps1         不依赖 Word 的解析器测试
 tools/Test-FormulaLayout.ps1     Word 正文与公式混排测试
 tools/Test-FormulaFormatting.ps1 Word 段落格式保留测试
+tools/Test-RemoveEquationBoxes.ps1 Word 公式去框与撤销测试
 tests/formulas.json             按语法类别组织的覆盖用例
 tests/layout.json               行内/独立公式与换行覆盖用例
 tools/Uninstall-AITeXWordAddin.ps1 卸载脚本

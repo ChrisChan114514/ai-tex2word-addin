@@ -25,6 +25,15 @@
                   screentip="查看本次未转换公式的原因"
                   onAction="AITeX_ShowLastReport"/>
         </group>
+        <group id="AITeX_GroupFormat" label="公式整理">
+          <button id="AITeX_RemoveBoxes"
+                  label="去除公式方框"
+                  size="large"
+                  imageMso="BorderNone"
+                  screentip="一键去除全文公式的 box 外框"
+                  supertip="移除文档中 Word 原生公式的方框（包括嵌套方框），保留内部公式内容与结构。支持 Ctrl+Z 一次撤销。尚未转换的 TeX 请先点击转换全文。"
+                  onAction="AITeX_RibbonRemoveBoxes"/>
+        </group>
       </tab>
     </tabs>
   </ribbon>
