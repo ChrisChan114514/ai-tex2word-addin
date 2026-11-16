@@ -8,6 +8,7 @@ Option Explicit
 
 Private Const SelectionShortcutMacro As String = _
     "AITeX_ConvertSelectionMacro"
+Private Const EquationFontName As String = "Times New Roman"
 Private mLastReport As String
 Private mConverting As Boolean
 
@@ -243,7 +244,7 @@ Public Function AITeX_GetLastReport() As String
 End Function
 
 Public Function AITeX_GetVersion() As String
-    AITeX_GetVersion = "2026.11.04-remove-boxes"
+    AITeX_GetVersion = "2026.11.16-equation-font"
 End Function
 
 Public Sub AITeX_ShowLastReport(ByVal control As Object)
@@ -445,6 +446,8 @@ Private Function InsertNativeEquation(ByVal source As Range, ByVal mathSource As
         ' Inline math already imported into prose must stay in that text flow.
         If equation.Type <> wdOMathInline Then equation.Type = wdOMathInline
     End If
+    ' Apply after Word finishes the inline/display conversion, which can reset fonts.
+    equation.Range.Font.Name = EquationFontName
     detail = ""
     InsertNativeEquation = True
     Exit Function

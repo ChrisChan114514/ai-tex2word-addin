@@ -41,6 +41,7 @@ try {
         $document = $word.Documents.Add()
         try {
             $document.Content.Text = "Unchanged before.`rInline \(C_d\), \(L_1\), \(M_1\).`r\[\frac{a}{b}\]`rUnchanged after."
+            $document.Content.Font.Name = 'Arial'
             # Reproduce the user's 2 pt override over Word's 8 pt Normal style.
             $document.Styles.Item(-1).ParagraphFormat.SpaceAfter = 8
             $document.Content.ParagraphFormat.SpaceAfter = 2
@@ -78,6 +79,15 @@ try {
                 if ([int]$converted -ne 4) { throw "Conversion failed: $($word.Run('AITeX_GetLastReport'))" }
             }
             Assert-ParagraphSnapshot $document $before
+            foreach ($equation in $document.OMaths) {
+                if ($equation.Range.Font.Name -ne 'Times New Roman') {
+                    throw "Equation font: $($equation.Range.Font.Name); expected Times New Roman."
+                }
+            }
+            if ($document.Paragraphs.Item(1).Range.Font.Name -ne 'Arial' -or
+                $document.Paragraphs.Item(4).Range.Font.Name -ne 'Arial') {
+                throw 'The surrounding text font changed.'
+            }
             if ($document.Styles.Item(-1).ParagraphFormat.SpaceAfter -ne $normalBefore) { throw 'The Normal style changed.' }
             [void]$document.Undo(1)
             if ($document.Content.Text -cne $source -or $document.OMaths.Count -ne 0) { throw 'Undo failed.' }
@@ -90,7 +100,7 @@ try {
         finally { $document.Close(0); $document = $null }
     }
     if ($failures.Count) { throw ($failures -join "`n") }
-    Write-Output 'PASS: 5 formatting cases; spacing, styles, indents, line spacing, untouched paragraphs and Undo preserved.'
+    Write-Output 'PASS: 5 formatting cases; Times New Roman equations; body fonts, spacing, styles, indents, line spacing and Undo preserved.'
 } finally {
     if ($document) { $document.Close(0) }
     if ($word) {
